@@ -11,7 +11,8 @@ Para a preparação do ambiente de desenvolvimento siga os seguintes passos:
 - **1)** Criar um **ambiente virtual** para desenvolvimento. Nossa linguagem será **Python 3.7.5 com Django 3.1.3**.
 - **2)** Rode `pip install -r requirements.txt`.
 - **3)** Rode `python manage.py migrate`. Se não ocorrer erros, prossiga;
-- **4)** Rode `python manage.py runserver`;
+- **4)** Rode `python manage.py createsuperuser` para criar um usuário;
+- **5)** Rode `python manage.py runserver`;
 
 ### 2. Arquitetura
 
