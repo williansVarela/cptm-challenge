@@ -1,0 +1,90 @@
+{% extends 'core/base.html' %}
+{% load static %}
+
+{% block css %}
+    <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/v/bs4/dt-1.10.22/r-2.2.6/sc-2.0.3/sp-1.2.1/sl-1.3.1/datatables.min.css"/>
+{% endblock %}
+
+{% block js_base %}
+<script type="text/javascript" src="https://cdn.datatables.net/v/bs4/dt-1.10.22/r-2.2.6/sc-2.0.3/sp-1.2.1/sl-1.3.1/datatables.min.js"></script>
+
+    <script type="text/javascript" charset="utf-8">
+          $(document).ready(function() {
+                var table = $('#main_table').DataTable({
+                    language: {
+                        "sEmptyTable": "Nenhum registro encontrado",
+                        "sInfo": "Mostrando de _START_ até _END_ de _TOTAL_ registros",
+                        "sInfoEmpty": "Mostrando 0 até 0 de 0 registros",
+                        "sInfoFiltered": "(Filtrados de _MAX_ registros)",
+                        "sInfoPostFix": "",
+                        "sInfoThousands": ".",
+                        "sLengthMenu": "_MENU_",
+                        "sLoadingRecords": "Carregando...",
+                        "sProcessing": "Processando...",
+                        "sZeroRecords": "Nenhum registro encontrado",
+                        "sSearch": "Pesquisar",
+                        "oPaginate": {
+                            "sNext": "Próximo",
+                            "sPrevious": "Anterior",
+                            "sFirst": "Primeiro",
+                            "sLast": "Último"
+                        },
+                        "oAria": {
+                            "sSortAscending": ": Ordenar colunas de forma ascendente",
+                            "sSortDescending": ": Ordenar colunas de forma descendente"
+                        }
+                    },
+                    {% if scrollY %}scrollY: {{scrollY}},{% else %}{% endif %}
+                    scrollX: true,
+                    lengthChange: {% if lengthChange %}{{lengthChange}}{% else %}false{% endif %},
+                    searching: {% if searching %}{{searching}}{% else %}false{% endif %},
+                    select: {% if select %}{{select}}{% else %}false{% endif %},
+                    paging: {% if paging %}{{paging}}{% else %}true{% endif %},
+                    pageLength: {% if items_per_page %}{{items_per_page}}{% else %}5{% endif %},
+                    lengthMenu: {% if lengthMenu %} {{lengthMenu}} {% else %}[[5, 10, 25, 50, -1], [5, 10, 25, 50, "Tudo"]]{% endif %},
+                    fixedColumns: {% if fixedColumns %}{{fixedColumns}}{% else %}false{% endif %},
+                    {% block table_addional_configuration %}
+                    {% endblock %}
+                });
+            });
+    </script>
+{% endblock %}
+
+{% block content %}
+    <div class="container" style="width: 100%">
+
+        <div class="table-wrapper">
+            <div class="table-title">
+                <div class="row">
+                    <div class="col-sm-6">
+                        <h2>{{ list_title }}</h2>
+                    </div>
+                    <div class="col-sm-6">
+                        <div class="text-right">
+                            {% if create_link  %}
+                                <a class="btn btn-{% if create_link_class %}{{create_link_class}}{% else %}success{% endif %}" href="{{create_link}}"><i class="fas fa-plus-circle"></i> Novo</a>
+                            {% endif %}
+                            {% if modal_button  %}
+                                <button type="button" class="btn btn-success" data-toggle="modal" data-target="#{{modal_id}}_modal" role="button" title="{{ title_button }}">{{modal_button}}</button>
+                            {% endif %}
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <table id="main_table" class="table table-striped table-hover table-bordered" style="width: 100%">
+                {% block table_content %}
+                {% endblock %}
+            </table>
+        </div>
+
+        {% block modals %}
+        {% endblock %}
+
+        {% if back_button %}
+            <div class="container" {% if reduced %}style="width:50%;"{% endif %}>
+                <a class="btn btn-{% if back_button_class %}{{back_button_class}}{% else %}secondary{% endif %}" href="{{back_link}}">{{back_button}}</a>
+            </div>
+        {% endif %}
+
+    </div>
+{% endblock %}

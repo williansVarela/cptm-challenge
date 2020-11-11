@@ -1,0 +1,121 @@
+{% load static %}
+
+
+<!DOCTYPE html>
+<html lang="pt-br">
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+        <meta http-equiv="x-ua-compatible" content="ie=edge">
+
+        <title>{{page_title}} | CPTM</title>
+
+        <!-- icon -->
+        <link rel="icon" href="{% static 'img/icon.png' %}" type="image/x-icon">
+        <!-- Font Awesome -->
+        <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.11.2/css/all.css">
+        <!-- Google Fonts Roboto -->
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700&display=swap">
+        <!-- Bootstrap CSS V.4.5.3 -->
+        <link rel="stylesheet" href={% static 'css/bootstrap/bootstrap.min.css' %}>
+        <!-- Material Design Bootstrap -->
+        <link rel="stylesheet" href="{% static 'css/mdb.min.css' %}">
+        <!-- Custom CSS -->
+        <link rel="stylesheet" href="{% static 'css/styles.css' %}">
+
+        {% block css %}
+        {% endblock %}
+
+        <!-- Extra Head-->
+        {% block ExtraHead %}
+        {% endblock %}
+
+        {% block js %}
+        {% endblock %}
+
+    </head>
+    <body>
+        <div class="container-for-admin">
+            <!--Main Navigation-->
+            <header>
+                <!-- Navbar -->
+                <nav class="navbar fixed-top navbar-expand-lg navbar-light white scrolling-navbar">
+                    <div class="container-fluid">
+
+                        <!-- Brand -->
+                        <a class="navbar-brand waves-effect" href="#" target="_blank">
+                            <img src="{% static 'img/icon.png' %}" width="35px" class="img-fluid" alt="Icone">
+                        </a>
+
+                        <!-- Collapse -->
+                        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+                            <span class="navbar-toggler-icon"></span>
+                        </button>
+
+                        <!-- Links -->
+                        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+
+                            <!-- Left -->
+                            {% include menu_navbar %}
+
+                            <!-- Right -->
+                            <ul class="navbar-nav nav-flex-icons">
+                                <li class="nav-item">
+                                    <a href="{% url 'logout'%}" class="nav-link border border-light rounded waves-effect" title="LogOut">
+                                        <i class="fas fa-sign-out-alt"></i>Sair
+                                    </a>
+                                </li>
+                            </ul>
+                        </div>                        
+                    </div>
+                </nav>
+                <!-- Navbar -->
+
+                <!-- Sidebar -->
+                <div class="sidebar-fixed position-fixed">
+
+                    <a class="logo-wrapper waves-effect">
+                        <img src="{% static 'img/logo.png' %}" class="img-fluid" alt="Logo">
+                    </a>
+
+                    {% include 'core/menu.html' %}
+
+                </div>
+                <!-- Sidebar -->
+
+            </header>
+            <!--Main Navigation-->
+
+            {% block content %}
+            {% endblock %}
+
+            <!--Footer-->
+            <footer class="page-footer text-center font-small primary-color-dark darken-2 mt-4 wow fadeIn">
+
+            <!--Copyright-->
+            <div class="footer-copyright py-3">
+                © 2020 Copyright: MetaCortex
+            </div>
+            <!--/.Copyright-->
+
+            </footer>
+            <!--/.Footer-->
+        </div>
+
+        <!-- jQuery -->
+        <script type="text/javascript" src="{% static 'js/jquery.min.js' %}"></script>
+        <!-- Bootstrap tooltips -->
+        <script type="text/javascript" src="{% static 'js/popper.min.js' %}"></script>
+        <!-- Bootstrap core V4.5.3 -->
+        <script type="text/javascript" src="{% static 'js/popper.min.js' %}"></script>
+        <script type="text/javascript" src="{% static 'js/bootstrap/bootstrap.min.js' %}"></script>
+        <!-- MDB core JavaScript -->
+        <script type="text/javascript" src="{% static 'js/mdb.min.js' %}"></script>
+        <!-- Custom JavaScript -->
+        <script type="text/javascript" src="{% static 'js/script.js' %}"></script>
+
+        {% block js_base %}
+        {% endblock %}
+
+    </body>
+</html>

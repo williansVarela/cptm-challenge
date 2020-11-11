@@ -1,0 +1,103 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="pt-br">
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+        <meta http-equiv="x-ua-compatible" content="ie=edge">
+
+        <title>Login | CPTM</title>
+
+        <!-- icon -->
+        <link rel="icon" href="{% static 'img/icon.png' %}" type="image/x-icon">
+        <!-- Font Awesome -->
+        <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.11.2/css/all.css">
+        <!-- Google Fonts Roboto -->
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700&display=swap">
+        <!-- Bootstrap CSS V.4.5.3 -->
+        <link rel="stylesheet" href={% static 'css/bootstrap/bootstrap.min.css' %}>
+        <!-- Material Design Bootstrap -->
+        <link rel="stylesheet" href="{% static 'css/mdb.min.css' %}">
+        <!-- Custom CSS -->
+        <link rel="stylesheet" href="{% static 'css/login.css' %}">
+
+    </head>
+<body>
+
+    <div class="wrapper bg">
+        <form method="post" role="form">
+            {% csrf_token %}
+            <!-- Icon -->
+            <div class="fadeIn first">
+                <img id="profile-img" src="{% static 'img/logo.png' %}" />
+            </div>
+            <!-- Login Form -->
+            <div class="group">
+                {{ form.username.errors }}
+                {{ form.username }}
+                <span class="highlight"></span><span class="bar"></span>
+                <label>E-mail</label>
+            </div>
+            <div class="group">
+                {{ form.password.errors }}
+                {{ form.password }}
+                <span class="highlight"></span><span class="bar"></span>
+                <label>Senha</label>
+            </div>
+
+            <button type="submit" class="button buttonBlue">Entrar
+                <div class="ripples buttonRipples"><span class="ripplesCircle"></span></div>
+            </button>
+            
+            <!-- Remind Passowrd -->
+            <div class="text-center">
+                <a class="underlineHover" href="{% url 'password_reset' %}">Esqueceu a senha?</a>
+            </div>
+        </form>
+    </div>
+    {% if form.non_field_errors %}
+        <!-- Frame Modal Bottom Success-->
+        <div class="modal fade bottom modal-content-clickable show" id="modalFieldErrors" tabindex="-1" role="dialog"
+        aria-labelledby="myModalLabel" data-backdrop="false" style="display: block; padding-right: 15px;" aria-modal="true">
+            <div class="modal-dialog modal-frame modal-bottom modal-notify modal-success" role="document">
+                <!--Content-->
+                <div class="modal-content">
+                    <!--Body-->
+                    <div class="modal-body">
+                        <div class="row d-flex justify-content-center align-items-center">
+                            <p class="pt-3 pr-2">
+                                {% for error in form.non_field_errors %}
+                                    {{error}}
+                                {% endfor %}
+                            </p>
+                            <a role="button" id="btnclose" class="btn btn-outline-success waves-effect" data-dismiss="modal">
+                                Fechar
+                            </a>
+                        </div>
+                    </div>
+                </div>
+                <!--/.Content-->
+            </div>
+        </div>
+    {% endif %}
+
+    <!-- jQuery -->
+    <script type="text/javascript" src="{% static 'js/jquery.min.js' %}"></script>
+    <!-- Bootstrap tooltips -->
+    <script type="text/javascript" src="{% static 'js/popper.min.js' %}"></script>
+    <!-- Bootstrap core V4.5.3 -->
+    <script type="text/javascript" src="{% static 'js/popper.min.js' %}"></script>
+    <script type="text/javascript" src="{% static 'js/bootstrap/bootstrap.min.js' %}"></script>
+    <!-- MDB core JavaScript -->
+    <script type="text/javascript" src="{% static 'js/mdb.min.js' %}"></script>
+    <!-- Custom JavaScript -->
+    <script type="text/javascript" src="{% static 'js/login.js' %}"></script>
+    <script>
+        $("#login").val('');
+        $("#btnclose").on("click", function() {
+            $("#modalFieldErrors").toggle();
+        });
+    </script
+</body>
+</html>
