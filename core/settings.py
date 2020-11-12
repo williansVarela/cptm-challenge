@@ -30,7 +30,7 @@ SECRET_KEY = config('SECRET_KEY', default='d)e2wpm15!hzyl%u8)j#f4tp@9r!3kb&q7g+d
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = config('DEBUG', default=False, cast=bool)
 
-ALLOWED_HOSTS = ['fiap-cptm-challenge.herokuapp.com/', '127.0.0.1']
+ALLOWED_HOSTS = ['fiap-cptm-challenge.herokuapp.com', '127.0.0.1']
 
 
 # Application definition
