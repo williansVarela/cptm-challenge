@@ -1,4 +1,3 @@
-from django import forms
 from django.contrib.auth.forms import AuthenticationForm, UserChangeForm, PasswordChangeForm, ReadOnlyPasswordHashField
 from django.utils.translation import gettext_lazy as _
 from core.utils import CustomErrorList
@@ -47,3 +46,24 @@ class UpdateProfileForm(UserChangeForm):
         labels = {"date_of_birth": "Data Nasc."}
 
 
+class UpdatePasswordForm(PasswordChangeForm):
+    def __init__(self, *args, **kwargs):
+        super(UpdatePasswordForm, self).__init__(*args, **kwargs)
+
+        self.fields['old_password'].widget.attrs = {'id': 'id_old_password', 'class': 'form-control',
+                                                    'placeholder': 'Digite a senha'}
+        self.fields['new_password1'].widget.attrs = {'id': 'id_new_password1', 'class': 'form-control',
+                                                     'placeholder': 'Digite a nova senha'}
+        self.fields['new_password2'].widget.attrs = {'id': 'id_new_password2', 'class': 'form-control',
+                                                     'placeholder': 'Confirme a nova senha'}
+
+        self.helper = FormHelper()
+        self.helper.layout = Layout(
+            Row(
+                Column('old_password', css_class='form-group col-md-4 mb-0'),
+                Column('new_password1', css_class='form-group col-md-4 mb-0'),
+                Column('new_password2', css_class='form-group col-md-4 mb-0'),
+                css_class='form-row'
+            ),
+            Submit('submit', 'Salvar')
+        )

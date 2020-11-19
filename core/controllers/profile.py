@@ -1,12 +1,11 @@
 # -*- coding: utf-8 -*-
 from __future__ import unicode_literals
-from django.views.generic import FormView, RedirectView, TemplateView, UpdateView
+from django.views.generic import UpdateView
 from django.contrib.auth.mixins import LoginRequiredMixin
-from django.shortcuts import redirect
 from django.contrib import messages
 from django.urls import reverse_lazy
 from django.contrib.auth.views import PasswordChangeView
-from core.forms import UpdateProfileForm
+from core.forms import UpdateProfileForm, UpdatePasswordForm
 from core.models import User
 
 
@@ -43,7 +42,27 @@ class UpdateProfileView(LoginRequiredMixin, UpdateView):
         return super(UpdateProfileView, self).form_valid(form)
 
 
+class PasswordResetByUser(PasswordChangeView):
+    template_name = 'core/base_crispy_form.html'
+    form_class = UpdatePasswordForm
+    success_url = reverse_lazy('change_password')
 
+    def get_context_data(self, **kwargs):
+        context = super(PasswordResetByUser, self).get_context_data(**kwargs)
+        context['menu_navbar'] = 'core/menu_navbar.html'
+        context['page'] = 'Perfil'
+        context['page_title'] = 'Alterar Senha'
+        context['form_title'] = 'Atualizar Senha'
+        context['back_button'] = 'Voltar'
+        context['back_link'] = reverse_lazy('home')
+        return context
 
+    def form_valid(self, form):
+        if form.is_valid():
+            messages.success(self.request, 'Sua senha foi atualizada com sucesso!', extra_tags='alert alert-success')
+        else:
+            messages.error(self.request, 'Por favor corrija o(s) erro(s) acima.', extra_tags='alert alert-danger')
+
+        return super(PasswordResetByUser, self).form_valid(form)
 
 
