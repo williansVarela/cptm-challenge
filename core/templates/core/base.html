@@ -94,18 +94,22 @@
             </header>
             <!--Main Navigation-->
 
-            {% block content %}
-            {% endblock %}
+            <!--Main layout-->
+            <main class="pt-5 mx-lg-5">
+                <div class="container-fluid mt-5">
+                    {% block content %}
+                    {% endblock %}
+                </div>
+            </main>
+            <!--Main layout-->
 
             <!--Footer-->
             <footer class="page-footer text-center font-small primary-color-dark darken-2 mt-4 wow fadeIn">
-
-            <!--Copyright-->
-            <div class="footer-copyright py-3">
-                © 2020 Copyright: MetaCortex
-            </div>
-            <!--/.Copyright-->
-
+                <!--Copyright-->
+                <div class="footer-copyright py-3">
+                    © 2020 Copyright: MetaCortex
+                </div>
+                <!--/.Copyright-->
             </footer>
             <!--/.Footer-->
         </div>
