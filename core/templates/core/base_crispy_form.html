@@ -4,34 +4,43 @@
 
 
 {% block content %}
-
-    <div class="container">
-        <div class="table-wrapper">
-            <div class="table-title">
-                <div class="row">
-                    <div class="col-sm-12">
-                        <h2>{{ form_title }}</h2>
+    <main class="pt-5 mx-lg-5">
+        <div class="container-fluid mt-5">
+            <div class="table-wrapper">
+                <div class="table-title">
+                    <div class="row">
+                        <div class="col-sm-12">
+                            <h2>{{ form_title }}</h2>
+                        </div>
                     </div>
                 </div>
+
+                {% crispy form %}
+                {% if table %}
+                    <br>
+                    <table id="main_table" class="table table-striped table-hover table-bordered" style="width: 100%">
+                        {% block table_content %}
+                        {% endblock %}
+                    </table>
+                {% endif %}
             </div>
-
-            {% crispy form %}
-            {% if table %}
-            <br>
-            <table id="main_table" class="table table-striped table-hover table-bordered" style="width: 100%">
-                {% block table_content %}
-                {% endblock %}
-            </table>
-            {% endif %}
         </div>
-    </div>
+        <br>
+        {% if messages %}
+            {% for message in messages %}
+                <div {% if message.tags %} class="{{ message.tags }}"{% endif %} role="alert">
+                    {{ message }}
+                    <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                        <span aria-hidden="true">×</span>
+                    </button>
+                </div>
+            {% endfor %}
+        {% endif %}
 
-    <br>
-
-    {% if back_button %}
-        <div class="container" {% if reduced %}style="width:50%;"{% endif %}>
-            <a class="btn btn-{% if back_button_class %}{{back_button_class}}{% else %}secondary{% endif %}" href="{{back_link}}">{{back_button}}</a>
-        </div>
-    {% endif %}
-
+        {% if back_button %}
+            <div class="container" {% if reduced %}style="width:50%;"{% endif %}>
+                <a class="btn btn-{% if back_button_class %}{{back_button_class}}{% else %}light{% endif %}" href="{{back_link}}">{{back_button}}</a>
+            </div>
+        {% endif %}
+    </main>
 {% endblock %}
