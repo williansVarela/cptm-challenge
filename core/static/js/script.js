@@ -123,11 +123,11 @@
         var myLineChart = new Chart(ctxD, {
             type: 'doughnut',
             data: {
-                labels: ["Red", "Green", "Yellow", "Grey", "Dark Grey"],
+                labels: ["Progressive Transferse Cracking", "Lateral Wear", "Abnormal Vertical Wear", "Corrosion", "Isolated Wheel Burn"],
                 datasets: [{
-                    data: [300, 50, 100, 40, 120],
-                    backgroundColor: ["#F7464A", "#46BFBD", "#FDB45C", "#949FB1", "#4D5360"],
-                    hoverBackgroundColor: ["#FF5A5E", "#5AD3D1", "#FFC870", "#A8B3C5", "#616774"]
+                    data: [19, 12, 5, 3, 3],
+                    backgroundColor: ['rgba(163, 158, 140, 0.3)', 'rgba(168, 3, 79, 0.2)', 'rgba(0, 130, 155, 0.2)', 'rgba(0, 170, 158, 0.2)', 'rgba(28, 20, 107, 0.2)','#1c146b','rgba(28, 20, 107, 0.2)'],
+                    hoverBackgroundColor: ["#a39e8c", "#a8034f", "#00829b", "#00aa9e", "#1c146b"]
                 }]
             },
             options: {

@@ -3,26 +3,10 @@
         <i class="fas fa-chart-line mr-3"></i>
         Dashboard
     </a>
-    <a href="#" class="list-group-item list-group-item-action waves-effect  {% if line_active %}active{% endif %}">
-        <i class="fas fa-train mr-3"></i>
-        Linhas
-    </a>
-    <a href="#" class="list-group-item list-group-item-action waves-effect  {% if maintenance_active %}active{% endif %}">
-        <i class="fas fa-wrench mr-3"></i>
-        Manutenção
-    </a>
-    <a href="#" class="list-group-item list-group-item-action waves-effect  {% if config_active %}active{% endif %}">
-        <i class="fas fa-cog mr-3"></i>
-        Configuração
-    </a>
     {% if user.is_admin %}
     <a href="{% url 'admin:index' %}" class="list-group-item list-group-item-action waves-effect}">
-        <i class="fas fa-user-secret mr-3"></i>
+        <i class="fas fa-cog mr-3"></i>
         Admin
     </a>
     {% endif %}
-    <a href="#" class="list-group-item list-group-item-action waves-effect  {% if doc_active %}active{% endif %}">
-        <i class="fas fa-book mr-3"></i>
-        Documentação
-    </a>
 </div>

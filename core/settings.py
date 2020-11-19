@@ -28,7 +28,7 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 SECRET_KEY = config('SECRET_KEY', default='d)e2wpm15!hzyl%u8)j#f4tp@9r!3kb&q7g+d^n*jj9p*^)zci')
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = config('DEBUG', default=False, cast=bool)
+DEBUG = config('DEBUG', default=True, cast=bool)
 
 ALLOWED_HOSTS = ['fiap-cptm-challenge.herokuapp.com', '127.0.0.1']
 
