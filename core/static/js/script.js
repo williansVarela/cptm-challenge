@@ -123,7 +123,7 @@
         var myLineChart = new Chart(ctxD, {
             type: 'doughnut',
             data: {
-                labels: ["Progressive Transferse Cracking", "Lateral Wear", "Abnormal Vertical Wear", "Corrosion", "Isolated Wheel Burn"],
+                labels: ["Rachadura Transversa Progressiva", "Desgaste Lateral", "Desgaste Vertical Anormal", "Corrosão", "Queimadura Isolada por Roda"],
                 datasets: [{
                     data: [19, 12, 5, 3, 3],
                     backgroundColor: ['rgba(163, 158, 140, 0.3)', 'rgba(168, 3, 79, 0.2)', 'rgba(0, 130, 155, 0.2)', 'rgba(0, 170, 158, 0.2)', 'rgba(28, 20, 107, 0.2)','#1c146b','rgba(28, 20, 107, 0.2)'],
