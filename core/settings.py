@@ -30,7 +30,7 @@ SECRET_KEY = config('SECRET_KEY', default='d)e2wpm15!hzyl%u8)j#f4tp@9r!3kb&q7g+d
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = config('DEBUG', default=True, cast=bool)
 
-ALLOWED_HOSTS = ['fiap-cptm-challenge.herokuapp.com', '127.0.0.1']
+ALLOWED_HOSTS = ['fiap-cptm-challenge.herokuapp.com', '127.0.0.1', 'localhost']
 
 
 # Application definition
@@ -44,6 +44,8 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'bootstrap_datepicker_plus',
     'crispy_forms',
+    'rest_framework',
+    'rest_framework.authtoken',
     # Custom Apps
     'core',
 ]
@@ -140,3 +142,8 @@ LOGOUT_REDIRECT_URL = '/'
 
 # Form Style
 CRISPY_TEMPLATE_PACK = 'bootstrap4'
+
+_route_all = json.load(open(os.path.join(BASE_DIR, 'config','route.json')))
+
+API_DEFAULT_URL = _route_all['API_DEFAULT_URL']
+API_KEY = _route_all['API_KEY']

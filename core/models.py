@@ -123,8 +123,8 @@ class User(AbstractBaseUser, PermissionsMixin):
 
 
 class Line(models.Model):
-    name = models.CharField(max_length=30, null=True, verbose_name='Nome')
-    humanized_name = models.CharField(max_length=30, null=True, verbose_name='Nome Humanizado')
+    name = models.CharField(max_length=30, null=True, unique=True, verbose_name='Nome')
+    humanized_name = models.CharField(max_length=30, null=True, unique=True, verbose_name='Nome Humanizado')
     number = models.IntegerField(null=True, verbose_name='Número')
     author = models.ForeignKey(User, null=True, blank=True, on_delete=models.DO_NOTHING, verbose_name='Criador')
 
@@ -138,4 +138,72 @@ class Line(models.Model):
     class Meta:
         verbose_name = 'Linha'
         verbose_name_plural = 'Linhas'
+        app_label = 'core'
+
+
+class Station(models.Model):
+    name = models.CharField(max_length=30, null=True, unique=True, verbose_name='Nome')
+    line = models.ForeignKey(Line, null=True, blank=True, on_delete=models.DO_NOTHING, verbose_name='Linha')
+
+    # Timestamps
+    created_at = models.DateTimeField(auto_now_add=True)
+    updated_at = models.DateTimeField(auto_now=True)
+
+    def __str__(self):
+        return self.name
+
+    class Meta:
+        verbose_name = 'Estação'
+        verbose_name_plural = 'Estações'
+        app_label = 'core'
+
+
+class Rails(models.Model):
+    temperature = models.FloatField(null=True)
+    station = models.ForeignKey(Station, null=True, blank=True, on_delete=models.DO_NOTHING, verbose_name='Estação')
+    line = models.ForeignKey(Line, null=True, blank=True, on_delete=models.DO_NOTHING, verbose_name='Linha')
+
+    # Timestamps
+    created_at = models.DateTimeField(auto_now_add=True)
+    updated_at = models.DateTimeField(auto_now=True)
+
+    def __str__(self):
+        return self.station.name
+
+    class Meta:
+        verbose_name = 'Trilho'
+        verbose_name_plural = 'Trilhos'
+        app_label = 'core'
+
+
+class ElectricalNetwork(models.Model):
+    temperature = models.FloatField(null=True)
+    station = models.ForeignKey(Station, null=True, blank=True, on_delete=models.DO_NOTHING, verbose_name='Estação')
+    line = models.ForeignKey(Line, null=True, blank=True, on_delete=models.DO_NOTHING, verbose_name='Linha')
+
+    # Timestamps
+    created_at = models.DateTimeField(auto_now_add=True)
+    updated_at = models.DateTimeField(auto_now=True)
+
+    def __str__(self):
+        return self.station.name
+
+    class Meta:
+        verbose_name = 'Rede Elétrica'
+        app_label = 'core'
+
+
+class AlertConfig(models.Model):
+    emails = models.CharField(null=True, blank=True, max_length=1000, verbose_name="Lista de E-mails")
+    modified_by = models.ForeignKey(User, null=True, blank=True, on_delete=models.DO_NOTHING, verbose_name='Criador')
+
+    # Timestamps
+    created_at = models.DateTimeField(auto_now_add=True)
+    updated_at = models.DateTimeField(auto_now=True)
+
+    def __str__(self):
+        return self.emails
+
+    class Meta:
+        verbose_name = 'Config. Alerta'
         app_label = 'core'

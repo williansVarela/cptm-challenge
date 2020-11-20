@@ -2,7 +2,7 @@ from django import forms
 from django.contrib import admin
 from django.contrib.auth.admin import UserAdmin as BaseUserAdmin
 from django.contrib.auth.forms import ReadOnlyPasswordHashField
-from core.models import User, Line
+from core.models import User, Line, Station, AlertConfig
 from core.forms import LineForm
 
 
@@ -111,3 +111,5 @@ class LineAdmin(admin.ModelAdmin):
 # Register the new UserAdmin
 admin.site.register(User, UserAdmin)
 admin.site.register(Line, LineAdmin)
+admin.site.register(Station)
+admin.site.register(AlertConfig)
