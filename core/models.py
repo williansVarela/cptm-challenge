@@ -120,3 +120,22 @@ class User(AbstractBaseUser, PermissionsMixin):
         app_label = 'core'
         permissions = (("admin_user", "Can Admin Usuários"),
                        ("disable_user", "Can disable Usuário"),)
+
+
+class Line(models.Model):
+    name = models.CharField(max_length=30, null=True, verbose_name='Nome')
+    humanized_name = models.CharField(max_length=30, null=True, verbose_name='Nome Humanizado')
+    number = models.IntegerField(null=True, verbose_name='Número')
+    author = models.ForeignKey(User, null=True, blank=True, on_delete=models.DO_NOTHING, verbose_name='Criador')
+
+    # Timestamps
+    created_at = models.DateTimeField(auto_now_add=True)
+    updated_at = models.DateTimeField(auto_now=True)
+
+    def __str__(self):
+        return self.humanized_name
+
+    class Meta:
+        verbose_name = 'Linha'
+        verbose_name_plural = 'Linhas'
+        app_label = 'core'

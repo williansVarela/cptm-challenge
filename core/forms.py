@@ -1,7 +1,8 @@
 from django.contrib.auth.forms import AuthenticationForm, UserChangeForm, PasswordChangeForm, ReadOnlyPasswordHashField
 from django.utils.translation import gettext_lazy as _
+from django import forms
 from core.utils import CustomErrorList
-from core.models import User
+from core.models import User, Line
 from crispy_forms.helper import FormHelper
 from crispy_forms.layout import Layout, Submit, Row, Column, Field
 
@@ -67,3 +68,23 @@ class UpdatePasswordForm(PasswordChangeForm):
             ),
             Submit('submit', 'Salvar')
         )
+
+
+class LineForm(forms.ModelForm):
+    def __init__(self, *args, **kwargs):
+        super(LineForm, self).__init__(*args, **kwargs)
+        self.helper = FormHelper()
+        self.helper.layout = Layout(
+            Row(
+                Column('name', css_class='form-group col-md-5 mb-0'),
+                Column('humanized_name', css_class='form-group col-md-5 mb-0'),
+                Column('number', css_class='form-group col-md-2 mb-0'),
+                css_class='form-row'
+            ),
+            Submit('submit', 'Salvar')
+        )
+
+    class Meta:
+        model = Line
+        fields = '__all__'
+        exclude = ('author',)

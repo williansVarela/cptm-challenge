@@ -13,7 +13,16 @@
             <span>/</span>
             <span>Dashboard</span>
           </h4>
-
+            <div class="dropdown">
+                <button class="btn btn-sm dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                    Linha
+                </button>
+                <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                    {% for line in lines %}
+                        <a class="dropdown-item" href="#">{{line.humanized_name}}</a>
+                    {% endfor %}
+                </div>
+            </div>
         </div>
 
       </div>

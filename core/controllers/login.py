@@ -7,6 +7,7 @@ from django.shortcuts import redirect
 from django.contrib import messages
 from django.urls import reverse_lazy
 from core.forms import LoginForm
+from core.models import Line
 
 
 class LoginView(FormView):
@@ -51,4 +52,5 @@ class HomeView(LoginRequiredMixin, TemplateView):
         context['page_title'] = 'Home'
         context['home_active'] = 'active'
         context['menu_navbar'] = 'core/menu_navbar.html'
+        context['lines'] = Line.objects.all()
         return context

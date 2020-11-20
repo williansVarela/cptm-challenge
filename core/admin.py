@@ -2,7 +2,8 @@ from django import forms
 from django.contrib import admin
 from django.contrib.auth.admin import UserAdmin as BaseUserAdmin
 from django.contrib.auth.forms import ReadOnlyPasswordHashField
-from core.models import User
+from core.models import User, Line
+from core.forms import LineForm
 
 
 class UserCreationForm(forms.ModelForm):
@@ -78,5 +79,35 @@ class UserAdmin(BaseUserAdmin):
     ordering = ('email',)
     filter_horizontal = ('groups', 'user_permissions',)
 
+
+class LineAdmin(admin.ModelAdmin):
+    # The forms to add and change user instances
+    form = LineForm
+    add_form = LineForm
+
+    def save_model(self, request, obj, form, change):
+        obj.author = request.user
+        super().save_model(request, obj, form, change)
+
+    # The fields to be used in displaying the User model.
+    # These override the definitions on the base UserAdmin
+    # that reference specific fields on auth.User.
+    list_display = ('name', 'humanized_name', 'number', 'author')
+    list_filter = ('name', 'author')
+    fieldsets = (
+        ('Geral', {'fields': ('name', 'humanized_name', 'number',)}),
+    )
+    # add_fieldsets is not a standard ModelAdmin attribute. UserAdmin
+    # overrides get_fieldsets to use this attribute when creating a user.
+    add_fieldsets = (
+        (None, {
+            'classes': ('wide',),
+            'fields': ('name', 'humanized_name', 'number')}
+        ),
+    )
+    search_fields = ('name', 'author', 'number')
+    ordering = ('name',)
+
 # Register the new UserAdmin
 admin.site.register(User, UserAdmin)
+admin.site.register(Line, LineAdmin)
