@@ -54,3 +54,16 @@ class HomeView(LoginRequiredMixin, TemplateView):
         context['menu_navbar'] = 'core/menu_navbar.html'
         context['lines'] = Line.objects.all()
         return context
+
+
+class DashboardView(LoginRequiredMixin, TemplateView):
+    template_name = 'core/index.html'
+
+    def get_context_data(self, **kwargs):
+        context = super(DashboardView, self).get_context_data(**kwargs)
+        context['page_title'] = 'Dashboard'
+        context['home_active'] = 'active'
+        context['menu_navbar'] = 'core/menu_navbar.html'
+        context['lines'] = Line.objects.all()
+        context['current_line'] = self.kwargs['line'].capitalize()
+        return context
