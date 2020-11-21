@@ -6,7 +6,7 @@
                 labels: ["Rubi", "Diamante", "Esmeralda", "Turquesa", "Coral", "Safira", "Jade"],
                 datasets: [{
                     label: '# Ocorrências',
-                    data: [12, 19, 3, 5, 2, 3, 1],
+                    data: [10, 61, 27, 19, 4, 4, 2],
                     backgroundColor: [
                         'rgba(168, 3, 79, 0.2)',
                         'rgba(163, 158, 140, 0.2)',
@@ -31,6 +31,7 @@
             options: {
                 scales: {
                     yAxes: [{
+                        label: '# Ocorrências',
                         ticks: {
                             beginAtZero: true
                         }
@@ -45,9 +46,9 @@
         var myLineChart = new Chart(ctxL, {
             type: 'line',
             data: {
-                labels: ["January", "February", "March", "April", "May", "June", "July"],
+                labels: ["Outubro", "Novembro"],
                 datasets: [{
-                        label: "Rubi",
+                        label: "Falhas Elétricas",
                         backgroundColor: [
                             'rgba(168, 3, 79, 0.2)',
                         ],
@@ -55,27 +56,17 @@
                             'rgba(168, 3, 79, 0.7)',
                         ],
                         borderWidth: 2,
-                        data: [65, 59, 80, 81, 56, 55, 40]
+                        data: [90, 86, 84, 102, 96, 74, 66]
                     },
                     {
-                        label: "Turquesa",
+                        label: "Falhas Identificadas",
                         backgroundColor: [
                             'rgba(0, 130, 155, 0.2)',
                         ],
                         borderColor: [
                             'rgba(0, 130, 155, 0.7)',
                         ],
-                        data: [28, 48, 40, 19, 86, 27, 90]
-                    },
-                    {
-                        label: "Safira",
-                        backgroundColor: [
-                            'rgba(28, 20, 107, 0.2)',
-                        ],
-                        borderColor: [
-                            'rgba(28, 20, 107, 0.7)',
-                        ],
-                        data: [30, 31, 28, 34, 40, 52, 60]
+                        data: [0, 0, 0, 0, 2, 22, 40]
                     },
                 ]
             },
