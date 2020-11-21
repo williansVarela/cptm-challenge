@@ -46,7 +46,7 @@
         var myLineChart = new Chart(ctxL, {
             type: 'line',
             data: {
-                labels: ["Outubro", "Novembro"],
+                labels: ["Janeiro", "Fevereiro", "Março", "Abril", "Maio", "Junho", "Julho"],
                 datasets: [{
                         label: "Falhas Elétricas",
                         backgroundColor: [
