@@ -17,7 +17,7 @@ class UpdateProfileView(LoginRequiredMixin, UpdateView):
 
     def get_context_data(self, **kwargs):
         context = super(UpdateProfileView, self).get_context_data(**kwargs)
-        context['menu_navbar'] = 'core/menu_navbar.html'
+        context['menu_navbar'] = 'core/menu_navbar_empty.html'
         context['page_title'] = 'Perfil'
         context['form_title'] = 'Perfil'
         context['back_button'] = 'Voltar'
@@ -49,7 +49,7 @@ class PasswordResetByUser(PasswordChangeView):
 
     def get_context_data(self, **kwargs):
         context = super(PasswordResetByUser, self).get_context_data(**kwargs)
-        context['menu_navbar'] = 'core/menu_navbar.html'
+        context['menu_navbar'] = 'core/menu_navbar_empty.html'
         context['page'] = 'Perfil'
         context['page_title'] = 'Alterar Senha'
         context['form_title'] = 'Atualizar Senha'
