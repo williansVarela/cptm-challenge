@@ -1,5 +1,6 @@
 from django.forms.utils import ErrorList
 
+
 class CustomErrorList(ErrorList):
     """
     Modified version of the original Django ErrorList class.

@@ -15,8 +15,7 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import path, include
-from core.controllers import login
-from core.controllers import profile
+from core.controllers import login, profile, dashboard
 
 urlpatterns = [
     path('admin/', admin.site.urls),
@@ -27,5 +26,5 @@ urlpatterns = [
     path('account/profile/', profile.UpdateProfileView.as_view(), name='profile'),
     path('account/password/', profile.PasswordResetByUser.as_view(), name='change_password'),
 
-    path('dashboard/<str:line>/', login.DashboardView.as_view(), name='dashboard'),
+    path('dashboard/<str:line>/', dashboard.DashboardView.as_view(), name='dashboard'),
 ]
