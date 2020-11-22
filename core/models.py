@@ -207,3 +207,22 @@ class AlertConfig(models.Model):
     class Meta:
         verbose_name = 'Config. Alerta'
         app_label = 'core'
+
+
+class Occurrence(models.Model):
+    line = models.ForeignKey(Line, null=True, blank=True, on_delete=models.DO_NOTHING, verbose_name='Linha')
+    station = models.ForeignKey(Station, null=True, blank=True, on_delete=models.DO_NOTHING, verbose_name='Estação')
+    type = models.CharField(max_length=30, null=True)
+    description = models.CharField(max_length=100, null=True)
+    status = models.BooleanField(default=False, verbose_name='Encerrado')
+
+    # Timestamps
+    created_at = models.DateTimeField(auto_now_add=True)
+    updated_at = models.DateTimeField(auto_now=True)
+
+    def __str__(self):
+        return self.line.humanized_name
+
+    class Meta:
+        verbose_name = 'Ocorrência'
+        app_label = 'core'
