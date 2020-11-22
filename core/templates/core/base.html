@@ -61,17 +61,45 @@
                             <!-- Right -->
                             <ul class="navbar-nav nav-flex-icons">
                                 <li class="nav-item dropdown">
-                                    <a class="nav-link dropdown-toggle" data-toggle="dropdown" href="#" role="button" aria-haspopup="true"
-                                    aria-expanded="false"><i class="fa fa-user"></i></a>
-                                    <div class="dropdown-menu">
-                                        <a class="dropdown-item" href="{% url 'profile' %}">Ver Perfil</a>
-                                        <a class="dropdown-item" href="{% url 'change_password' %}">Alterar Senha</a>
+                                    <a id="notificationDropdown" class="nav-link px-1" data-toggle="dropdown" aria-expanded="false">
+                                        <i class="far fa-bell"></i>
+                                    </a>
+                                    <div class="dropdown-menu dropdown-menu-right navbar-dropdown preview-list pb-0" aria-labelledby="notificationDropdown">
+
                                     </div>
                                 </li>
-                                <li class="nav-item">
-                                    <a href="{% url 'logout'%}" class="nav-link border border-light rounded waves-effect" title="LogOut">
-                                        <i class="fas fa-sign-out-alt"></i>Sair
+                                <li class="nav-item dropdown">
+                                    <a id="messageDropdown" class="nav-link px-1" data-toggle="dropdown" aria-expanded="false">
+                                        <i class="far fa-envelope"></i>
                                     </a>
+                                    <div class="dropdown-menu dropdown-menu-right navbar-dropdown preview-list pb-0" aria-labelledby="messageDropdown">
+
+                                    </div>
+                                </li>
+                                <li class="nav-item dropdown d-none d-xl-inline-block user-dropdown">
+                                    <a class="nav-link dropdown-toggle" id="userDropdown" data-toggle="dropdown" aria-expanded="false">
+                                        <img class="img-xs rounded-circle" src="{%  static 'img/profile/user-generic.jpg' %}" alt="Imagem Perfil">
+                                    </a>
+                                    <div class="dropdown-menu dropdown-menu-right navbar-dropdown" aria-labelledby="userDropdown">
+                                        <div class="dropdown-header text-center">
+                                            <img class="img-md rounded-circle" src="{%  static 'img/profile/user-generic.jpg' %}" alt="Imagem Perfil">
+                                            <p class="mb-1 mt-3 font-weight-semibold">
+
+                                            </p>
+                                            <p class="font-weight-light text-muted mb-0">
+                                                {{ user.email }}
+                                            </p>
+                                        </div>
+                                        <a href="{% url 'profile'%}" class="dropdown-item" title="Logout">
+                                            <i class="fa fa-user"></i>  Perfil
+                                        </a>
+                                        <a href="{% url 'change_password'%}" class="dropdown-item" title="Logout">
+                                            <i class="fas fa-unlock-alt"></i>  Alterar Senha
+                                        </a>
+                                        <a href="{% url 'logout'%}" class="dropdown-item" title="Logout">
+                                            <i class="fas fa-sign-out-alt"></i>  Sair
+                                        </a>
+                                    </div>
                                 </li>
                             </ul>
                         </div>                        
@@ -119,7 +147,6 @@
         <!-- Bootstrap tooltips -->
         <script type="text/javascript" src="{% static 'js/popper.min.js' %}"></script>
         <!-- Bootstrap core V4.5.3 -->
-        <script type="text/javascript" src="{% static 'js/popper.min.js' %}"></script>
         <script type="text/javascript" src="{% static 'js/bootstrap/bootstrap.min.js' %}"></script>
         <!-- MDB core JavaScript -->
         <script type="text/javascript" src="{% static 'js/mdb.min.js' %}"></script>
