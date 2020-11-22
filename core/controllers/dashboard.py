@@ -3,7 +3,22 @@ from __future__ import unicode_literals
 from django.views.generic import TemplateView
 from django.contrib.auth.mixins import LoginRequiredMixin
 from core.models import Line
-from chartjs.views.lines import BaseLineChartView
+import json
+
+
+class HomeView(LoginRequiredMixin, TemplateView):
+    template_name = 'core/index.html'
+    login_url = 'login/'
+
+    def get_context_data(self, **kwargs):
+        context = super(HomeView, self).get_context_data(**kwargs)
+        context['page_title'] = 'Home'
+        context['home_active'] = 'active'
+        context['menu_navbar'] = 'core/menu_navbar.html'
+        context['lines'] = Line.objects.all()
+        context['occurrence_labels'] = json.dumps(["Rubi", "Diamante", "Esmeralda", "Turquesa", "Coral", "Safira", "Jade"])
+        context['occurrence_data'] = json.dumps([10, 61, 27, 19, 4, 4, 2])
+        return context
 
 
 class DashboardView(LoginRequiredMixin, TemplateView):
@@ -15,6 +30,8 @@ class DashboardView(LoginRequiredMixin, TemplateView):
         context['home_active'] = 'active'
         context['menu_navbar'] = 'core/menu_navbar.html'
         context['lines'] = Line.objects.all()
+        context['occurrence_labels'] = json.dumps(["Rubi", "Diamante", "Esmeralda", "Turquesa", "Coral", "Safira", "Jade"])
+        context['occurrence_data'] = json.dumps([10, 61, 27, 19, 4, 4, 2])
         context['current_line'] = self.kwargs['line'].capitalize()
         return context
 
@@ -34,5 +51,4 @@ class DashboardView(LoginRequiredMixin, TemplateView):
                 [87, 21, 94, 3, 90, 13, 65]]
 
 
-line_chart = TemplateView.as_view(template_name='core/index.html')
-line_chart_json = DashboardView.as_view()
+

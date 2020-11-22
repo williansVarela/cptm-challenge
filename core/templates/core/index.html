@@ -1,284 +1,230 @@
 {% extends 'core/base.html' %}
 {% load static %}
 
+{% block css %}
+<!-- MDBootstrap Datatables  -->
+<link href="{% static 'css/addons/datatables.min.css' %}" rel="stylesheet"
+<!-- DataTables Select CSS -->
+<link href="{% static 'css/addons/datatables-select.min.css' %}" rel="stylesheet">
+{% endblock %}
+
 {% block content %}
-      <!-- Heading -->
-      <div class="card mb-4 wow fadeIn">
+    <!-- Heading -->
+    <div class="card mb-4 wow fadeIn">
 
-        <!--Card content-->
-        <div class="card-body d-sm-flex justify-content-between">
+    <!--Card content-->
+    <div class="card-body d-sm-flex justify-content-between">
 
-            <h4 class="mb-2 mb-sm-0 pt-1">
-                <span>Dashboard</span>
-                {% if current_line %}
-                    <span>-</span>
-                    <span>{{current_line}}</span>
-                {% endif %}
-            </h4>
-            <div class="dropdown">
-                <button class="btn btn-sm dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                    Linha
-                </button>
-                <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-                    {% for line in lines %}
-                        <a class="dropdown-item" href="{% url 'dashboard' line.name %}">{{line.humanized_name}}</a>
-                    {% endfor %}
+        <h4 class="mb-2 mb-sm-0 pt-1">
+            <span>Dashboard</span>
+            {% if current_line %}
+                <span>-</span>
+                <span>{{current_line}}</span>
+            {% endif %}
+        </h4>
+        <div class="dropdown">
+            <button class="btn btn-sm dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                Linha
+            </button>
+            <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                {% for line in lines %}
+                    <a class="dropdown-item" href="{% url 'dashboard' line.name %}">{{line.humanized_name}}</a>
+                {% endfor %}
+            </div>
+        </div>
+    </div>
+
+    </div>
+    <!-- Heading -->
+
+    <!--Grid row-->
+    <div class="row wow fadeIn">
+
+    <!--Grid column-->
+    <div class="col-md-8 mb-4">
+
+        <!--Card-->
+        <div class="card">
+            <!--Card content-->
+            <div class="card-body">
+                <canvas id="myChart"></canvas>
+            </div>
+        </div>
+        <!--/.Card-->
+
+    </div>
+    <!--Grid column-->
+
+    <!--Grid column-->
+    <div class="col-md-4 mb-4" style="display: flex; flex-direction: column; justify-content: space-between">
+        <!--Card-->
+        <div class="card">
+            <div class="">
+                <div class="float-right text-right p-4">
+                    <p class="text-uppercase text-muted mb-1"><small>Total Ocorrências</small></p>
+                    <h4 class="font-weight-bold mb-0">127</h4>
                 </div>
             </div>
         </div>
-
-      </div>
-      <!-- Heading -->
-
-      <!--Grid row-->
-      <div class="row wow fadeIn">
-
-        <!--Grid column-->
-        <div class="col-md-9 mb-4">
-
-          <!--Card-->
-          <div class="card">
-
+        <!--Card-->
+        <!--Card-->
+        <div class="card">
             <!--Card content-->
             <div class="card-body">
-
-              <canvas id="myChart"></canvas>
-
+                <canvas id="radarChart"></canvas>
             </div>
-
-          </div>
-          <!--/.Card-->
-
         </div>
-        <!--Grid column-->
+        <!--/.Card-->
+    </div>
+    <!--Grid row-->
 
-        <!--Grid column-->
-        <div class="col-md-3 mb-4">
+    <!--Grid row-->
+    <div class="row wow fadeIn" id="ocorrencias">
 
-          <!--Card-->
-          <div class="card mb-4">
-            <!-- Card header -->
-            <div class="card-header">Linhas</div>
-
+    <!--Grid column-->
+    <div class="col-md-6 mb-4">
+        <!--Card-->
+        <div class="card">
             <!--Card content-->
             <div class="card-body">
 
-              <!-- List group links -->
-              <div class="list-group list-group-flush">
-                <a class="list-group-item list-group-item-action waves-effect">7 Rubi
-                  <span class="text-success float-right"><i class="fas fa-check-circle"></i></span>
-                </a>
-                <a class="list-group-item list-group-item-action waves-effect">8 Diamante
-                  <span class="text-success float-right"><i class="fas fa-check-circle"></i></span>
-                </a>
-                <a class="list-group-item list-group-item-action waves-effect">9 Esmeralda
-                  <span class="text-success float-right"><i class="fas fa-check-circle"></i></span>
-                </a>
-                <a class="list-group-item list-group-item-action waves-effect">10 Turquesa
-                  <span class="text-success float-right"><i class="fas fa-check-circle"></i></span>
-                </a>
-                <a class="list-group-item list-group-item-action waves-effect">11 Coral
-                  <span class="text-success float-right"><i class="fas fa-check-circle"></i></span>
-                </a>
-                <a class="list-group-item list-group-item-action waves-effect">12 Safira
-                  <span class="text-success float-right"><i class="fas fa-check-circle"></i></span>
-                </a>
-                <a class="list-group-item list-group-item-action waves-effect">13 Jade
-                  <span class="text-success float-right"><i class="fas fa-check-circle"></i></span>
-                </a>
-              </div>
-              <!-- List group links -->
+                <!-- Table  -->
+                <table id="OccurrenceTable" class="table table-striped table-hover" cellspacing="0">
+                    <!-- Table head -->
+                    <thead class="blue-grey lighten-4">
+                      <tr>
+                        <th>#</th>
+                        <th>Linha</th>
+                        <th>Ocorrências em Aberto</th>
+                        <th>Código</th>
+                      </tr>
+                    </thead>
+                    <!-- Table head -->
 
-            </div>
-
-          </div>
-          <!--/.Card-->
-
-        </div>
-        <!--Grid column-->
-
-      </div>
-      <!--Grid row-->
-
-      <!--Grid row-->
-      <div class="row wow fadeIn" id="ocorrencias">
-
-        <!--Grid column-->
-        <div class="col-md-6 mb-4">
-
-          <!--Card-->
-          <div class="card">
-
-            <!--Card content-->
-            <div class="card-body">
-
-              <!-- Table  -->
-              <table class="table table-hover">
-                <!-- Table head -->
-                <thead class="blue-grey lighten-4">
-                  <tr>
-                    <th>#</th>
-                    <th>Linha</th>
-                    <th>Ocorrências em Aberto</th>
-                    <th>Código</th>
-                  </tr>
-                </thead>
-                <!-- Table head -->
-
+                    <!-- Table body -->
+                    <tbody>
+                        <tr>
+                          <th scope="row">1</th>
+                          <td>8 Diamante</td>
+                          <td>Rachadura Transversa Progressiva</td>
+                          <td>111</td>
+                        </tr>
+                        <tr>
+                          <th scope="row">2</th>
+                          <td>7 Rubi</td>
+                          <td>Desgaste Lateral</td>
+                          <td>2203</td>
+                        </tr>
+                        <tr>
+                          <th scope="row">3</th>
+                          <td>10 Turquesa</td>
+                          <td>Desgaste Vertical Anormal</td>
+                          <td>2204</td>
+                        </tr>
+                        <tr>
+                          <th scope="row">4</th>
+                          <td>9 Esmeralda</td>
+                          <td>Corrosão</td>
+                          <td>134</td>
+                        </tr>
+                        <tr>
+                          <th scope="row">5</th>
+                          <td>12 Safira</td>
+                          <td>Queimadura Isolada por Roda</td>
+                          <td>2251</td>
+                        </tr>
+                        <tr>
+                          <th scope="row">6</th>
+                          <td>11 Coral</td>
+                          <td>Corrugação de Passo Curto</td>
+                          <td>2201</td>
+                        </tr>
+                    </tbody>
                 <!-- Table body -->
-                <tbody>
-                  <tr>
-                    <th scope="row">1</th>
-                    <td>8 Diamante</td>
-                    <td>Rachadura Transversa Progressiva</td>
-                    <td>111</td>
-                  </tr>
-                  <tr>
-                    <th scope="row">2</th>
-                    <td>7 Rubi</td>
-                    <td>Desgaste Lateral</td>
-                    <td>2203</td>
-                  </tr>
-                  <tr>
-                    <th scope="row">3</th>
-                    <td>10 Turquesa</td>
-                    <td>Desgaste Vertical Anormal</td>
-                    <td>2204</td>
-                  </tr>
-                  <tr>
-                    <th scope="row">4</th>
-                    <td>9 Esmeralda</td>
-                    <td>Corrosão</td>
-                    <td>134</td>
-                  </tr>
-                  <tr>
-                    <th scope="row">5</th>
-                    <td>12 Safira</td>
-                    <td>Queimadura Isolada por Roda</td>
-                    <td>2251</td>
-                  </tr>
-                  <tr>
-                    <th scope="row">6</th>
-                    <td>11 Coral</td>
-                    <td>Corrugação de Passo Curto</td>
-                    <td>2201</td>
-                  </tr>
-                </tbody>
-                <!-- Table body -->
-              </table>
-              <!-- Table  -->
-
+                </table>
+                <!-- Table  -->
             </div>
-
-          </div>
-          <!--/.Card-->
-
         </div>
-        <!--Grid column-->
+        <!--/.Card-->
+    </div>
+    <!--Grid column-->
 
-        <!--Grid column-->
-        <div class="col-md-6 mb-4">
+    <!--Grid column-->
+    <div class="col-md-6 mb-4" style="display: flex; flex-direction: column; justify-content: space-between">
 
-          <!--Card-->
-          <div class="card">
-
-            <!--Card content-->
-            <div class="card-body">
-
-              <!-- Table  -->
-              <table class="table table-hover">
-                <!-- Table head -->
-                <thead class="blue lighten-4">
-                  <tr>
-                    <th>#</th>
-                    <th>Lorem</th>
-                    <th>Ipsum</th>
-                    <th>Dolor</th>
-                  </tr>
-                </thead>
-                <!-- Table head -->
-
-                <!-- Table body -->
-                <tbody>
-                  <tr>
-                    <th scope="row">1</th>
-                    <td>Cell 1</td>
-                    <td>Cell 2</td>
-                    <td>Cell 3</td>
-                  </tr>
-                  <tr>
-                    <th scope="row">2</th>
-                    <td>Cell 4</td>
-                    <td>Cell 5</td>
-                    <td>Cell 6</td>
-                  </tr>
-                  <tr>
-                    <th scope="row">3</th>
-                    <td>Cell 7</td>
-                    <td>Cell 8</td>
-                    <td>Cell 9</td>
-                  </tr>
-                </tbody>
-                <!-- Table body -->
-              </table>
-              <!-- Table  -->
-
-            </div>
-
-          </div>
-          <!--/.Card-->
-
-        </div>
-        <!--Grid column-->
-
-      </div>
-      <!--Grid row-->
-
-      <!--Grid row-->
-      <div class="row wow fadeIn" id="redeletrica">
-
-        <!--Grid column-->
-        <div class="col-lg-12 col-md-12 mb-4">
-
-          <!--Card-->
-          <div class="card">
-
-            <!-- Card header -->
-            <div class="card-header">Falhas Rede Elétrica</div>
-
-            <!--Card content-->
-            <div class="card-body">
-
-              <canvas id="lineChart"></canvas>
-
-            </div>
-
-          </div>
-          <!--/.Card-->
-
-        </div>
-        <!--Grid column-->
-
-        
-
-        <!--Grid column-->
-        <div class="col-lg-6 col-md-6 mb-4">
-
-          <!--Card-->
-          <div class="card">
+        <!--Card-->
+        <div class="card">
 
             <!-- Card header -->
             <div class="card-header">Ocorrências Mais Frequentes no Último Trimestre</div>
 
             <!--Card content-->
             <div class="card-body">
-
-              <canvas id="doughnutChart"></canvas>
-
+                <canvas id="doughnutChart"></canvas>
             </div>
 
+        </div>
+        <!--/.Card-->
+        <!-- Card -->
+        <div class="card light-blue lighten-1 white-text">
+          <div class="card-body d-flex justify-content-between align-items-center">
+            <div>
+              <p class="h2-responsive font-weight-bold mt-n2 mb-0">44</p>
+              <p class="mb-0">Ocorrências em Aberto</p>
+            </div>
+            <div>
+                <i class="fas fa-exclamation-circle fa-4x text-black-40"></i>
+            </div>
           </div>
-          <!--/.Card-->
+          <a class="card-footer footer-hover small text-center white-text border-0 p-2">Ver mais<i class="fas fa-arrow-circle-right pl-2"></i></a>
+        </div>
+        <!-- Card -->
+
+    </div>
+    <!--Grid column-->
+
+    </div>
+    <!--Grid row-->
+
+    <!--Grid row-->
+    <div class="row wow fadeIn" id="redeletrica">
+
+        <!--Grid column-->
+        <div class="col-lg-12 col-md-12 mb-4">
+
+            <!--Card-->
+            <div class="card">
+
+                <!-- Card header -->
+                <div class="card-header">Temperatura Média Rede Elétrica</div>
+
+                <!--Card content-->
+                <div class="card-body">
+                    <canvas id="lineChart"></canvas>
+                </div>
+
+            </div>
+            <!--/.Card-->
+
+        </div>
+        <!--Grid column-->
+
+        <!--Grid column-->
+        <div class="col-lg-12 col-md-12 mb-4">
+
+            <!--Card-->
+            <div class="card">
+
+                <!-- Card header -->
+                <div class="card-header">Falhas Rede Elétrica</div>
+
+                <!--Card content-->
+                <div class="card-body">
+                    <canvas id="lineChart2"></canvas>
+                </div>
+
+            </div>
+            <!--/.Card-->
 
         </div>
         <!--Grid column-->
@@ -286,25 +232,322 @@
         <!--Grid column-->
         <div class="col-lg-6 col-md-6 mb-4">
 
-          <!--Card-->
-          <div class="card">
+        </div>
+        <!--Grid column-->
 
-            <!-- Card header -->
-            <div class="card-header">Radar Chart</div>
-
-            <!--Card content-->
-            <div class="card-body">
-
-              <canvas id="radarChart"></canvas>
-
-            </div>
-
-          </div>
-          <!--/.Card-->
+        <!--Grid column-->
+        <div class="col-lg-6 col-md-6 mb-4">
 
         </div>
         <!--Grid column-->
-      </div>
-      <!--Grid row-->
+    </div>
+    <!--Grid row-->
+
 
 {% endblock %}
+
+
+{% block js_base %}
+<!-- DataTables JS -->
+<script type="text/javascript" src="{% static 'js/addons/datatables.min.js' %}"></script>
+<!-- DataTables Select JS -->
+<script src="{% static 'js/addons/datatables-select.min.js' %}" type="text/javascript"></script>
+<script>
+    // Occurrences - Bar Chart
+    var occurrenceLabels = JSON.parse('{{ occurrence_labels|safe }}');
+    var occurrenceData = JSON.parse('{{ occurrence_data|safe }}');
+
+    var ctx = document.getElementById("myChart").getContext('2d');
+    var myChart = new Chart(ctx, {
+        type: 'bar',
+        data: {
+            labels: occurrenceLabels,
+            datasets: [{
+                label: '# Ocorrências',
+                data: occurrenceData,
+                backgroundColor: [
+                    'rgba(168, 3, 79, 0.2)',
+                    'rgba(163, 158, 140, 0.2)',
+                    'rgba(0, 170, 158, 0.2)',
+                    'rgba(0, 130, 155, 0.2)',
+                    'rgba(245, 95, 26, 0.2)',
+                    'rgba(28, 20, 107, 0.2)',
+                    'rgba(0, 176, 82, 0.2)'
+                ],
+                borderColor: [
+                    '#a8034f',
+                    '#a39e8c',
+                    '#00aa9e',
+                    '#00829b',
+                    '#f55f1a',
+                    '#1c146b',
+                    '#00b052'
+                ],
+                borderWidth: 1
+            }]
+        },
+        options: {
+            scales: {
+                yAxes: [{
+                    label: '# Ocorrências',
+                    ticks: {
+                        beginAtZero: true
+                    }
+                }]
+            }
+        }
+    });
+
+    //doughnut
+    var ctxD = document.getElementById("doughnutChart").getContext('2d');
+    var myLineChart = new Chart(ctxD, {
+        type: 'doughnut',
+        data: {
+            labels: ["Rachadura Transversa Progressiva", "Desgaste Lateral", "Desgaste Vertical Anormal", "Corrosão", "Queimadura Isolada por Roda"],
+            datasets: [{
+                data: [19, 12, 5, 3, 3],
+                hoverBackgroundColor: ['rgba(163, 158, 140, 0.8)', 'rgba(168, 3, 79, 0.8)', 'rgba(0, 130, 155, 0.8)', 'rgba(0, 170, 158, 0.8)', 'rgba(28, 20, 107, 0.8)','#1c146b','rgba(28, 20, 107, 0.8)'],
+                backgroundColor: ["#a39e8c", "#a8034f", "#00829b", "#00aa9e", "#1c146b"]
+            }]
+        },
+        options: {
+            responsive: true,
+            legend: {
+                display: true,
+                position: 'right',
+                labels: {
+                    padding: 20,
+                    boxWidth: 10
+                }
+            },
+        }
+    });
+
+    //radar
+    var ctxR = document.getElementById("radarChart").getContext('2d');
+    var myRadarChart = new Chart(ctxR, {
+        type: 'radar',
+        data: {
+            labels: ["Rubi", "Diamante", "Esmeralda", "Turquesa", "Coral", "Safira", "Jade"],
+            datasets: [{
+                label: "My First dataset",
+                data: [65, 59, 90, 81, 56, 55, 40],
+                backgroundColor: [
+                    'rgba(105, 0, 132, .2)',
+                ],
+                borderColor: [
+                    'rgba(200, 99, 132, .7)',
+                ],
+                borderWidth: 2
+            }, {
+                label: "My Second dataset",
+                data: [28, 48, 40, 19, 96, 27, 100],
+                backgroundColor: [
+                    'rgba(0, 250, 220, .2)',
+                ],
+                borderColor: [
+                    'rgba(0, 213, 132, .7)',
+                ],
+                borderWidth: 2
+            }]
+        },
+        options: {
+            responsive: true,
+            legend: {
+                display: false,
+                position: 'right',
+                labels: {
+                    padding: 20,
+                    boxWidth: 10
+                }
+            },
+        }
+    });
+
+    //line
+    var ctxL = document.getElementById("lineChart").getContext('2d');
+    var myLineChart = new Chart(ctxL, {
+        type: 'line',
+        data: {
+            labels: ["Janeiro", "Fevereiro", "Março", "Abril", "Maio", "Junho", "Julho"],
+            datasets: [{
+                    label: "Rubi",
+                    lineTension: 0,
+                    fill: false,
+                    backgroundColor: [
+                        'rgba(168, 3, 79, 0.2)',
+                    ],
+                    borderColor: [
+                        'rgba(168, 3, 79, 0.7)',
+                    ],
+                    borderWidth: 2,
+                    data: [32.31, 32.51, 33.96, 35.73, 33.22, 32.71, 32.89]
+                },
+                {
+                    label: "Diamante",
+                    lineTension: 0,
+                    fill: false,
+                    backgroundColor: [
+                        'rgba(163, 158, 140, 0.2)',
+                    ],
+                    borderColor: [
+                        'rgba(163, 158, 140, 0.7)',
+                    ],
+                    data: [34.48, 35.72, 34.8, 36.57, 34.46, 32.79, 31.68]
+                },
+                {
+                    label: "Esmeralda",
+                    lineTension: 0,
+                    fill: false,
+                    backgroundColor: [
+                        'rgba(0, 170, 158, 0.2)',
+                    ],
+                    borderColor: [
+                        'rgba(0, 170, 158, 0.7)',
+                    ],
+                    data: [34.23, 32.61, 33.71, 31.96, 33.55, 31.77, 32.54]
+                },
+                {
+                    label: "Turquesa",
+                    lineTension: 0,
+                    fill: false,
+                    backgroundColor: [
+                        'rgba(0, 130, 155, 0.2)',
+                    ],
+                    borderColor: [
+                        'rgba(0, 130, 155, 0.7)',
+                    ],
+                    data: [34.63, 34.57, 35.72, 33.89, 33.45, 31.73, 30.93]
+                },
+                {
+                    label: "Coral",
+                    lineTension: 0,
+                    fill: false,
+                    backgroundColor: [
+                        'rgba(245, 95, 26, 0.2)',
+                    ],
+                    borderColor: [
+                        'rgba(245, 95, 26, 0.7)',
+                    ],
+                    data: [34.86, 33.85, 34.77, 33.96, 33.16, 31.14, 32.94]
+                },
+                {
+                    label: "Safira",
+                    lineTension: 0,
+                    fill: false,
+                    backgroundColor: [
+                        'rgba(28, 20, 107, 0.2)',
+                    ],
+                    borderColor: [
+                        'rgba(28, 20, 107, 0.7)',
+                    ],
+                    data: [34.47, 33.82, 34.64, 34.79, 33.62, 31.9, 31.39]
+                },
+                {
+                    label: "Jade",
+                    lineTension: 0,
+                    fill: false,
+                    backgroundColor: [
+                        'rgba(0, 176, 82, 0.2)',
+                    ],
+                    borderColor: [
+                        'rgba(0, 176, 82, 0.7)',
+                    ],
+                    data: [33.96, 32.79, 33.37, 33.15, 32.28, 31.41, 32.25]
+                },
+            ]
+        },
+        options: {
+            responsive: true,
+        }
+    });
+
+    //line
+    var ctxL = document.getElementById("lineChart2").getContext('2d');
+    var myLineChart = new Chart(ctxL, {
+        type: 'line',
+        data: {
+            labels: ["Janeiro", "Fevereiro", "Março", "Abril", "Maio", "Junho", "Julho"],
+            datasets: [{
+                    label: "Falhas Elétricas",
+                    lineTension: 0,
+                    backgroundColor: [
+                        'rgba(168, 3, 79, 0.2)',
+                    ],
+                    borderColor: [
+                        'rgba(168, 3, 79, 0.7)',
+                    ],
+                    borderWidth: 2,
+                    data: [90, 86, 84, 102, 96, 74, 66]
+                },
+                {
+                    label: "Falhas Identificadas",
+                    lineTension: 0,
+                    backgroundColor: [
+                        'rgba(0, 130, 155, 0.2)',
+                    ],
+                    borderColor: [
+                        'rgba(0, 130, 155, 0.7)',
+                    ],
+                    data: [0, 0, 0, 0, 2, 22, 40]
+                },
+            ]
+        },
+        options: {
+            responsive: true
+        }
+    });
+
+
+// Material Design Datatable
+$(document).ready(function () {
+    $('#OccurrenceTable').DataTable({
+        language: {
+            "sEmptyTable": "Nenhum registro encontrado",
+            "sInfo": "_END_ de _TOTAL_ registros",
+            "sInfoEmpty": "Mostrando 0 até 0 de 0 registros",
+            "sInfoFiltered": "(Filtrados de _MAX_ registros)",
+            "sInfoPostFix": "",
+            "sInfoThousands": ".",
+            "sLengthMenu": "_MENU_",
+            "sLoadingRecords": "Carregando...",
+            "sProcessing": "Processando...",
+            "sZeroRecords": "Nenhum registro encontrado",
+            "sSearch": "",
+            "sSearchPlaceholder": "Pesquisar",
+            "oPaginate": {
+                "sNext": "Próximo",
+                "sPrevious": "Anterior",
+                "sFirst": "Primeiro",
+                "sLast": "Último"
+            },
+            "oAria": {
+                "sSortAscending": ": Ordenar colunas de forma ascendente",
+                "sSortDescending": ": Ordenar colunas de forma descendente"
+            }
+        },
+        scrollY: 300,
+        scrollX: true,
+        lengthChange: {% if lengthChange %}{{lengthChange}}{% else %}false{% endif %},
+        searching: {% if searching %}{{searching}}{% else %}false{% endif %},
+        select: {% if select %}{{select}}{% else %}false{% endif %},
+        paging: {% if paging %}{{paging}}{% else %}false{% endif %},
+        pageLength: {% if items_per_page %}{{items_per_page}}{% else %}5{% endif %},
+        lengthMenu: {% if lengthMenu %} {{lengthMenu}} {% else %}[[5, 10, 25, 50, -1], [5, 10, 25, 50, "Tudo"]]{% endif %},
+        fixedColumns: {% if fixedColumns %}{{fixedColumns}}{% else %}false{% endif %},
+    });
+    $('#OccurrenceTable_wrapper').find('label').each(function () {
+        $(this).parent().append($(this).children());
+    });
+    $('#OccurrenceTable_wrapper .dataTables_length').addClass('d-flex flex-row');
+    $('#OccurrenceTable_wrapper .dataTables_filter').addClass('md-form');
+    $('#OccurrenceTable_wrapper select').removeClass('custom-select custom-select-sm form-control form-control-sm');
+    $('#OccurrenceTable_wrapper select').addClass('mdb-select');
+    $('#OccurrenceTable_wrapper .mdb-select').materialSelect();
+    $('#OccurrenceTable_wrapper .dataTables_filter').find('label').remove();
+
+});
+
+</script>
+{% endblock %}
+

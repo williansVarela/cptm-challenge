@@ -21,7 +21,7 @@ urlpatterns = [
     path('admin/', admin.site.urls),
     path('account/', include('django.contrib.auth.urls')),
     path('login/', login.LoginView.as_view(), name='login'),
-    path('', login.HomeView.as_view(), name='home'),
+    path('', dashboard.HomeView.as_view(), name='home'),
 
     path('account/profile/', profile.UpdateProfileView.as_view(), name='profile'),
     path('account/password/', profile.PasswordResetByUser.as_view(), name='change_password'),

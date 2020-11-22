@@ -41,18 +41,3 @@ class LogoutView(LoginRequiredMixin, RedirectView):
     def get(self, request, *args, **kwargs):
         logout(request)
         return super(LogoutView, self).get(request, *args, **kwargs)
-
-
-class HomeView(LoginRequiredMixin, TemplateView):
-    template_name = 'core/index.html'
-    login_url = 'login/'
-
-    def get_context_data(self, **kwargs):
-        context = super(HomeView, self).get_context_data(**kwargs)
-        context['page_title'] = 'Home'
-        context['home_active'] = 'active'
-        context['menu_navbar'] = 'core/menu_navbar.html'
-        context['lines'] = Line.objects.all()
-        return context
-
-
