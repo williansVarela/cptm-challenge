@@ -48,5 +48,5 @@ class ElectricalNetworkSerializer(serializers.ModelSerializer):
 
 	class Meta:
 		model = models.ElectricalNetwork
-		fields = ('pk', 'temperature', 'station', 'station_id', 'line', 'line_id')
+		fields = ('pk', 'pole', 'km', 'side_power_supply', 'temperature', 'image', 'station', 'station_id', 'line', 'line_id')
 
