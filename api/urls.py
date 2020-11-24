@@ -9,5 +9,6 @@ router.register(r'rails', drone.RailsViewSet)
 router.register(r'electricalnetwork', drone.ElectricalNetworkViewSet)
 
 urlpatterns = [
-    path("api/", include(router.urls)),
+    path("", include(router.urls)),
+    path("api/", include('rest_framework.urls')),
 ]

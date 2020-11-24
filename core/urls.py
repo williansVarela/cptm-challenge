@@ -18,6 +18,7 @@ from django.urls import path, include
 from core.controllers import login, profile, dashboard
 
 urlpatterns = [
+    path('api/', include('api.urls'), name='api'),
     path('admin/', admin.site.urls),
     path('account/', include('django.contrib.auth.urls')),
     path('login/', login.LoginView.as_view(), name='login'),

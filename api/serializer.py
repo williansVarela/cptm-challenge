@@ -23,13 +23,8 @@ class RailsSerializer(serializers.ModelSerializer):
 				for field_name in existing - allowed:
 					self.fields.pop(field_name)
 
-	@staticmethod
-	def setup_eager_loading(queryset):
-		queryset = queryset
-		return queryset
-
 	class Meta:
-		model = register.Rails
+		model = models.Rails
 		fields = ('pk', 'temperature', 'station', 'station_id', 'line', 'line_id')
 
 
@@ -51,12 +46,7 @@ class ElectricalNetworkSerializer(serializers.ModelSerializer):
 				for field_name in existing - allowed:
 					self.fields.pop(field_name)
 
-	@staticmethod
-	def setup_eager_loading(queryset):
-		queryset = queryset
-		return queryset
-
 	class Meta:
-		model = register.ElectricalNetwork
+		model = models.ElectricalNetwork
 		fields = ('pk', 'temperature', 'station', 'station_id', 'line', 'line_id')
 

@@ -2,7 +2,7 @@ from django import forms
 from django.contrib import admin
 from django.contrib.auth.admin import UserAdmin as BaseUserAdmin
 from django.contrib.auth.forms import ReadOnlyPasswordHashField
-from core.models import User, Line, Station, AlertConfig
+from core.models import User, Line, Station, AlertConfig, Occurrence, Rails, ElectricalNetwork
 from core.forms import LineForm
 
 
@@ -73,7 +73,7 @@ class UserAdmin(BaseUserAdmin):
         (None, {
             'classes': ('wide',),
             'fields': ('name', 'email', 'cpf', 'date_of_birth', 'role', 'password1', 'password2')}
-        ),
+         ),
     )
     search_fields = ('email', 'name', 'cpf')
     ordering = ('email',)
@@ -103,13 +103,15 @@ class LineAdmin(admin.ModelAdmin):
         (None, {
             'classes': ('wide',),
             'fields': ('name', 'humanized_name', 'number')}
-        ),
+         ),
     )
     search_fields = ('name', 'author', 'number')
     ordering = ('name',)
+
 
 # Register the new UserAdmin
 admin.site.register(User, UserAdmin)
 admin.site.register(Line, LineAdmin)
 admin.site.register(Station)
 admin.site.register(AlertConfig)
+admin.site.register(ElectricalNetwork)

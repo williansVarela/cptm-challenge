@@ -183,6 +183,7 @@ class ElectricalNetwork(models.Model):
     temperature = models.FloatField(null=True, verbose_name='Temperatura')
     station = models.ForeignKey(Station, null=True, blank=True, on_delete=models.DO_NOTHING, verbose_name='Estação')
     line = models.ForeignKey(Line, null=True, blank=True, on_delete=models.DO_NOTHING, verbose_name='Linha')
+    image = models.CharField(max_length=1000, null=True, verbose_name='Imagem')
 
     # Timestamps
     created_at = models.DateTimeField(auto_now_add=True)
