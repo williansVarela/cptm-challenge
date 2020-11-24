@@ -177,7 +177,10 @@ class Rails(models.Model):
 
 
 class ElectricalNetwork(models.Model):
-    temperature = models.FloatField(null=True)
+    pole = models.CharField(max_length=5, null=True, verbose_name='Poste')
+    km = models.PositiveIntegerField(null=True, verbose_name='KM')
+    side_power_supply = models.CharField(max_length=5, null=True, verbose_name='Alimentação Lado')
+    temperature = models.FloatField(null=True, verbose_name='Temperatura')
     station = models.ForeignKey(Station, null=True, blank=True, on_delete=models.DO_NOTHING, verbose_name='Estação')
     line = models.ForeignKey(Line, null=True, blank=True, on_delete=models.DO_NOTHING, verbose_name='Linha')
 
