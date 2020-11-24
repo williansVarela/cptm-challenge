@@ -45,6 +45,8 @@
 
         <!--Card-->
         <div class="card">
+            <!-- Card header -->
+            <div class="card-header">Ocorrências por Linha no Último Trimestre</div>
             <!--Card content-->
             <div class="card-body">
                 <canvas id="myChart"></canvas>
@@ -85,6 +87,8 @@
     <div class="col-md-6 mb-4">
         <!--Card-->
         <div class="card">
+            <!-- Card header -->
+            <div class="card-header">Últimos Defeitos Identificados</div>
             <!--Card content-->
             <div class="card-body">
 
@@ -240,8 +244,71 @@
 
         </div>
         <!--Grid column-->
+
+        <!--Grid column-->
+        <div class="col-md-6 mb-4">
+
+          <!--Card-->
+          <div class="card">
+
+            <!--Section: Modals-->
+            <section>
+
+              <!-- Side Modal Bottom Right Danger-->
+              <div class="modal fade right" id="sideModalBRDangerDemo" tabindex="-1" role="dialog" aria-labelledby="myModalLabel"
+                aria-hidden="true" data-backdrop="false">
+                <div class="modal-dialog modal-side modal-bottom-right modal-notify modal-danger" role="document">
+                  <!--Content-->
+                  <div class="modal-content">
+                    <!--Header-->
+                    <div class="modal-header">
+                      <p class="heading">Notificação</p>
+
+                      <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true" class="white-text">&times;</span>
+                      </button>
+                    </div>
+
+                    <!--Body-->
+                    <div class="modal-body">
+
+                      <div class="row">
+
+                        <div class="col-12">
+                          <p>AVISO: <br> Corrosão identificada nos trilhos</p>
+                          <h2>
+                            <span class="badge">Linha Esmeralda</span>
+                          </h2>
+                        </div>
+                      </div>
+                    </div>
+
+                    <!--Footer-->
+                    <div class="modal-footer justify-content-center">
+                      <a role="button" class="btn btn-outline-danger waves-effect" data-dismiss="modal">Fechar</a>
+                    </div>
+                  </div>
+                  <!--/.Content-->
+                </div>
+              </div>
+              <!-- Side Modal Bottom Right Danger-->
+
+            </section>
+            <!--Section: Modals-->
+
+
+          </div>
+          <!--/.Card-->
+
+        </div>
+        <!--Grid column-->
+
     </div>
     <!--Grid row-->
+
+
+
+
 
 
 {% endblock %}
@@ -294,6 +361,14 @@
                         beginAtZero: true
                     }
                 }]
+            },
+            legend: {
+                display: false,
+                position: 'top',
+                labels: {
+                    padding: 20,
+                    boxWidth: 10
+                }
             }
         }
     });
